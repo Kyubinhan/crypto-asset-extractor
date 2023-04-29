@@ -9,18 +9,20 @@ const CryptoAssetList: React.FC = () => {
 
   return (
     <div>
-      {data.pages.map((group, pageIdx) => {
-        return (
-          <React.Fragment key={pageIdx}>
-            {group.data.map((asset) => (
-              <div key={asset.id} style={{ padding: 12 }}>
-                <input type="checkbox" id="scales" name="scales" />
-                {asset.name} {asset.symbol}
-              </div>
-            ))}
-          </React.Fragment>
-        );
-      })}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {data.pages.map((group, pageIdx) => {
+          return (
+            <React.Fragment key={pageIdx}>
+              {group.data.map((asset) => (
+                <div key={asset.id} style={{ padding: 12 }}>
+                  <input type="checkbox" id="scales" name="scales" />
+                  {asset.name} {asset.symbol}
+                </div>
+              ))}
+            </React.Fragment>
+          );
+        })}
+      </div>
       <button
         onClick={() => fetchNextPage()}
         disabled={!hasNextPage || isFetching}
