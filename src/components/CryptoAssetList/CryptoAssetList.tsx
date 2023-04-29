@@ -1,9 +1,14 @@
 import React from "react";
-import { TOTAL_PAGE, useInfiniteCryptoAssets } from "src/queries";
+import { useSelectedSymbolStore } from "src/hooks/useSelectedCryptoAssetStore";
+import { CRYPTO_ASSET_TOTAL_PAGE, useInfiniteCryptoAssets } from "src/queries";
 
 const CryptoAssetList: React.FC = () => {
   const { data, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCryptoAssets();
+  const { selected, toggle } = useSelectedSymbolStore();
+  const selectedSymbols = Object.entries(selected)
+    .filter(([_, checked]) => checked)
+    .map(([symbol]) => symbol);
 
   if (!data) return null;
 
@@ -15,7 +20,13 @@ const CryptoAssetList: React.FC = () => {
             <React.Fragment key={pageIdx}>
               {group.data.map((asset) => (
                 <div key={asset.id} style={{ padding: 12 }}>
-                  <input type="checkbox" id="scales" name="scales" />
+                  <input
+                    type="checkbox"
+                    id="scales"
+                    name="scales"
+                    checked={Boolean(selected[asset.symbol])}
+                    onChange={() => toggle(asset.symbol)}
+                  />
                   {asset.name} {asset.symbol}
                 </div>
               ))}
@@ -27,8 +38,9 @@ const CryptoAssetList: React.FC = () => {
         onClick={() => fetchNextPage()}
         disabled={!hasNextPage || isFetching}
       >
-        더 보기({data.pages.length} / {TOTAL_PAGE})
+        더 보기({data.pages.length} / {CRYPTO_ASSET_TOTAL_PAGE})
       </button>
+      <div style={{ marginTop: 12 }}>{selectedSymbols.join(", ")}</div>
     </div>
   );
 };

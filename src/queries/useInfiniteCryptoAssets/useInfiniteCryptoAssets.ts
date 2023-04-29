@@ -7,7 +7,7 @@ type Response = CMCResponse<CryptoAsset> & { pageParam: number };
 
 const TOTAL_COUNT = 20;
 const SIZE = 15;
-export const TOTAL_PAGE = Math.floor(TOTAL_COUNT / SIZE) + 1;
+export const CRYPTO_ASSET_TOTAL_PAGE = Math.floor(TOTAL_COUNT / SIZE) + 1;
 
 const fetchCryptoAssets = ({ pageParam = 0 }) => {
   const start = 1 + pageParam * SIZE;
@@ -26,7 +26,7 @@ export const useInfiniteCryptoAssets = () => {
   return useInfiniteQuery([QUERY_KEYS.CRYPTO_ASSETS], fetchCryptoAssets, {
     getNextPageParam: ({ pageParam = 0 }) => {
       const currPage = pageParam + 1;
-      if (currPage < TOTAL_PAGE) {
+      if (currPage < CRYPTO_ASSET_TOTAL_PAGE) {
         return pageParam + 1;
       }
 
