@@ -1,5 +1,9 @@
+import Image from "next/image";
 import React from "react";
+
 import { SelectedSymbolState } from "src/hooks";
+
+import styles from "./style.module.scss";
 
 interface Props {
   symbols: string[];
@@ -13,11 +17,20 @@ const SelectedSymbolList: React.FC<Props> = ({
   isToggleAble,
 }) => {
   return (
-    <div style={{ marginTop: 12, display: "flex" }}>
+    <div className={styles.list}>
       {symbols.map((symbol) => (
-        <div key={symbol} style={{ padding: 4 }}>
+        <div key={symbol} className={styles.symbol}>
           {symbol}
-          {isToggleAble && <button onClick={() => toggle(symbol)}>x</button>}
+          {isToggleAble && (
+            <button onClick={() => toggle(symbol)}>
+              <Image
+                src="/images/close.svg"
+                width={10}
+                height={10}
+                alt="close icon"
+              />
+            </button>
+          )}
         </div>
       ))}
     </div>
