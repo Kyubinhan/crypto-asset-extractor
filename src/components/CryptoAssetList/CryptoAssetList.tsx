@@ -5,13 +5,14 @@ import { CRYPTO_ASSET_TOTAL_PAGE, useInfiniteCryptoAssets } from "src/queries";
 interface Props {
   selected: SelectedSymbolState["selected"];
   toggle: SelectedSymbolState["toggle"];
+  hidden: boolean;
 }
 
-const CryptoAssetList: React.FC<Props> = ({ selected, toggle }) => {
+const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
   const { data, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCryptoAssets();
 
-  if (!data) return null;
+  if (!data || hidden) return null;
 
   return (
     <div>

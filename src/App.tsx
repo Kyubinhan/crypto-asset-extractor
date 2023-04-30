@@ -29,9 +29,11 @@ function App() {
     <main>
       <TopBar />
       <Header />
-      {!isExtractMode && (
-        <CryptoAssetList selected={selected} toggle={toggle} />
-      )}
+      <CryptoAssetList
+        selected={selected}
+        toggle={toggle}
+        hidden={isExtractMode}
+      />
       <SelectedSymbolList
         symbols={selectedSymbols}
         toggle={toggle}
