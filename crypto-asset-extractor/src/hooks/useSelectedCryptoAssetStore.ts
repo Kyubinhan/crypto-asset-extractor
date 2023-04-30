@@ -17,9 +17,9 @@ export const useSelectedSymbolStore = create<SelectedSymbolState>()((set) => ({
       };
     }),
   reset: () =>
-    set(() => ({
+    set({
       selected: {},
-    })),
+    }),
 }));
 
 export const getSelectedSymbols = (selected: SelectedSymbolState["selected"]) =>

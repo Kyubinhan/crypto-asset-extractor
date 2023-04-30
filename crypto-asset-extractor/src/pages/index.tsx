@@ -6,7 +6,7 @@ import Header from "src/components/Header";
 import PriceChangeRateTable from "src/components/PriceChangeRateTable";
 import SelectedSymbolList from "src/components/SelectedSymbolList";
 import StopWatch from "src/components/StopWatch";
-import TopBar from "src/components/TapBar";
+import TopBar from "src/components/TopBar";
 import {
   getSelectedSymbols,
   useExtractQueryParam,
