@@ -38,7 +38,12 @@ const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
                   })}
                   onClick={() => toggle(asset.symbol)}
                 >
-                  <input type="checkbox" checked={isSelected} />
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    // To silence the onChange missing console error
+                    onChange={() => {}}
+                  />
                   <div className={styles.text}>
                     <span className={styles.name}>{asset.name}</span>
                     <span className={styles.symbol}>{asset.symbol}</span>

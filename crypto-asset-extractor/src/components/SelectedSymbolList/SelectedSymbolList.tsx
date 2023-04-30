@@ -18,7 +18,7 @@ const SelectedSymbolList: React.FC<Props> = ({
 }) => {
   return (
     <div className={styles.list}>
-      {symbols.map((symbol) => (
+      {symbols.sort().map((symbol) => (
         <div key={symbol} className={styles.symbol}>
           {symbol}
           {isToggleAble && (
