@@ -2,13 +2,12 @@ import React from "react";
 import { useSelectedSymbolStore } from "src/hooks/useSelectedCryptoAssetStore";
 import { CRYPTO_ASSET_TOTAL_PAGE, useInfiniteCryptoAssets } from "src/queries";
 
-const CryptoAssetList: React.FC = () => {
+interface Props {}
+
+const CryptoAssetList: React.FC<Props> = () => {
   const { data, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCryptoAssets();
   const { selected, toggle } = useSelectedSymbolStore();
-  const selectedSymbols = Object.entries(selected)
-    .filter(([_, checked]) => checked)
-    .map(([symbol]) => symbol);
 
   if (!data) return null;
 
@@ -40,7 +39,6 @@ const CryptoAssetList: React.FC = () => {
       >
         더 보기({data.pages.length} / {CRYPTO_ASSET_TOTAL_PAGE})
       </button>
-      <div style={{ marginTop: 12 }}>{selectedSymbols.join(", ")}</div>
     </div>
   );
 };
