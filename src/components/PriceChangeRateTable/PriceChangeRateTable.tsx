@@ -25,7 +25,7 @@ const PriceChangeRateTable: React.FC<Props> = ({
         const quote = asset.quote[convert];
 
         return (
-          <div>
+          <div key={asset.id}>
             {asset.name} ₩{quote.price.toFixed(2)}{" "}
             {quote.percent_change_24h.toFixed(2)}%{" "}
             {quote.percent_change_7d.toFixed(2)}%
