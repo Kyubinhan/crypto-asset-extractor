@@ -1,4 +1,7 @@
+import clsx from "clsx";
 import React, { useEffect, useState } from "react";
+
+import styles from "./style.module.scss";
 
 interface Props {
   handleStart: () => void;
@@ -38,10 +41,14 @@ const StopWatch: React.FC<Props> = ({ handleStart, handleReset }) => {
   const seconds = String(time % 60).padStart(2, "0");
 
   return (
-    <div>
-      {hours}:{minutes}:{seconds}
+    <div className={styles["stop-watch"]}>
+      <span className={clsx(styles.timer, { [styles.counting]: isCounting })}>
+        {hours}:{minutes}:{seconds}
+      </span>
       {isCounting ? (
-        <button onClick={onResetClick}>Reset</button>
+        <button className={styles["reset-btn"]} onClick={onResetClick}>
+          Reset
+        </button>
       ) : (
         <button onClick={onStartClick}>Start</button>
       )}

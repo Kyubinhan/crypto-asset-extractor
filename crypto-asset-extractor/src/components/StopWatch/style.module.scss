@@ -1,0 +1,37 @@
+.stop-watch {
+  margin: 32px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .timer {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 150%;
+    letter-spacing: -0.3px;
+    color: var(--grayscale-grey-8);
+
+    &.counting {
+      font-weight: 700;
+      line-height: 150%;
+      color: var(--haru-purple-100);
+    }
+  }
+
+  button {
+    background: var(--haru-purple-100);
+    border: none;
+    border-radius: 4px;
+    padding: 14px 32px;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: -0.3px;
+    color: var(--grayscale-white);
+  }
+
+  .reset-btn {
+    background-color: var(--grayscale-grey-6);
+  }
+}
