@@ -1,28 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
+import axios from "axios";
 
 import { QUERY_KEYS } from "src/queries";
-import data from "./data.json";
+// import data from "./data.json";
 
 type Response = CMCResponse<{ [symbol: string]: PriceChangeRate }>;
 
 const fetchPriceChangeRates = async (symbols: string[], convert: string) => {
-  // const { data } = await axios.get<Response>("api/cmc", {
-  //   params: {
-  //     endpoint: "v1/cryptocurrency/quotes/latest",
-  //     symbol: symbols.join(","),
-  //     aux: "cmc_rank",
-  //     convert,
-  //   },
-  // });
-
-  // return data;
-
-  return new Promise<Response>((resolve) => {
-    setTimeout(() => {
-      resolve(data);
-    }, 200);
+  const { data } = await axios.get<Response>("api/cmc", {
+    params: {
+      endpoint: "v1/cryptocurrency/quotes/latest",
+      symbol: symbols.join(","),
+      aux: "cmc_rank",
+      convert,
+    },
   });
+
+  return data;
+
+  // return new Promise<Response>((resolve) => {
+  //   setTimeout(() => {
+  //     resolve(data);
+  //   }, 200);
+  // });
 };
 
 type QueryArgs = {
@@ -35,6 +35,7 @@ export const usePriceChangeRatesQuery = ({ symbols, convert }: QueryArgs) => {
     () => fetchPriceChangeRates(symbols, convert),
     {
       refetchInterval: 5 * 1000, // 5 seconds
+      enabled: symbols.length > 0,
     }
   );
 };
