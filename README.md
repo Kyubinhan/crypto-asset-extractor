@@ -1,4 +1,4 @@
-####Kyubin Han's submission
+### Kyubin Han's submission
 
 App can be accessed [here](https://crypto-asset-extractor-7pldkspaa-kyubinhan.vercel.app/).
 
