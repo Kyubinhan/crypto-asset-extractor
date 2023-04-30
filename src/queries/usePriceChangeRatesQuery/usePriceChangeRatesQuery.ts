@@ -5,21 +5,21 @@ import data from "./data.json";
 
 type Response = CMCResponse<{ [id: string]: PriceChangeRate }>;
 
-const fetchPriceChangeRates = (
-  symbols: string[],
-  convert: string
-): Response => {
-  return data;
+const fetchPriceChangeRates = (symbols: string[], convert: string) => {
+  console.log(symbols, convert);
+
+  return new Promise<Response>((resolve) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 200);
+  });
 };
 
 type QueryArgs = {
   symbols: string[];
-  convert?: string;
+  convert: string;
 };
-export const usePriceChangeRatesQuery = ({
-  symbols,
-  convert = "KRW",
-}: QueryArgs) => {
+export const usePriceChangeRatesQuery = ({ symbols, convert }: QueryArgs) => {
   return useQuery(
     [QUERY_KEYS.PRICE_CHANGE_RATES, symbols, convert],
     () => fetchPriceChangeRates(symbols, convert),

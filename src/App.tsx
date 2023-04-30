@@ -1,5 +1,6 @@
 import CryptoAssetList from "src/components/CryptoAssetList/CryptoAssetList";
 import Header from "src/components/Header";
+import PriceChangeRateTable from "src/components/PriceChangeRateTable/PriceChangeRateTable";
 import SelectedSymbolList from "src/components/SelectedSymbolList/SelectedSymbolList";
 import StopWatch from "src/components/StopWatch/StopWatch";
 import TopBar from "src/components/TapBar";
@@ -28,13 +29,16 @@ function App() {
     <main>
       <TopBar />
       <Header />
-      <CryptoAssetList selected={selected} toggle={toggle} />
+      {!isExtractMode && (
+        <CryptoAssetList selected={selected} toggle={toggle} />
+      )}
       <SelectedSymbolList
         symbols={selectedSymbols}
         toggle={toggle}
         isToggleAble={!isExtractMode}
       />
       <StopWatch handleStart={handleStart} handleReset={handleReset} />
+      {isExtractMode && <PriceChangeRateTable symbols={selectedSymbols} />}
     </main>
   );
 }
