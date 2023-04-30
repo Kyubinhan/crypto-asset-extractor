@@ -12,6 +12,7 @@ import {
   useExtractQueryParam,
   useSelectedSymbolStore,
 } from "src/hooks";
+
 import styles from "src/styles/Home.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
