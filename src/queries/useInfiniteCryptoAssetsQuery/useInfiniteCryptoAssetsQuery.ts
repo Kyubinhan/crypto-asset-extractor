@@ -22,7 +22,7 @@ const fetchCryptoAssets = ({ pageParam = 0 }) => {
   });
 };
 
-export const useInfiniteCryptoAssets = () => {
+export const useInfiniteCryptoAssetsQuery = () => {
   return useInfiniteQuery([QUERY_KEYS.CRYPTO_ASSETS], fetchCryptoAssets, {
     getNextPageParam: ({ pageParam = 0 }) => {
       const currPage = pageParam + 1;

@@ -1,4 +1,4 @@
-export * from "./useInfiniteCryptoAssets";
+export * from "./useInfiniteCryptoAssetsQuery";
 export * from "./usePriceChangeRatesQuery";
 
 export const QUERY_KEYS = {
