@@ -30,9 +30,17 @@
     line-height: 150%;
     letter-spacing: -0.3px;
     color: var(--grayscale-white);
+
+    &:hover {
+      background-color: var(--haru-purple-120);
+    }
   }
 
   .reset-btn {
-    background-color: var(--grayscale-grey-6);
+    background-color: var(--grayscale-grey-60);
+
+    &:hover {
+      background-color: var(--grayscale-grey-70);
+    }
   }
 }
