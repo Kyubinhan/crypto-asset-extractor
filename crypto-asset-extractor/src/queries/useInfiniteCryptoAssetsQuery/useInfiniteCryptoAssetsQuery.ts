@@ -1,7 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+// import axios from "axios";
 
-import axios from "axios";
 import { QUERY_KEYS } from "src/queries";
+import data from "./data.json";
 
 type Response = CMCResponse<CryptoAsset[]> & { pageParam: number };
 
@@ -13,23 +14,23 @@ const fetchCryptoAssets = async ({ pageParam = 0 }) => {
   const start = 1 + pageParam * SIZE;
   const limit = Math.min(SIZE * (pageParam + 1), TOTAL_COUNT);
 
-  const { data } = await axios.get<Response>("/api/cmc", {
-    params: {
-      endpoint: "v1/cryptocurrency/map",
-      listing_status: "active",
-      sort: "cmc_rank",
-      start,
-      limit,
-    },
-  });
-
-  return { ...data, pageParam };
-
-  // return new Promise<Response>((resolve) => {
-  //   setTimeout(() => {
-  //     resolve({ ...data, pageParam });
-  //   }, 500);
+  // const { data } = await axios.get<Response>("/api/cmc", {
+  //   params: {
+  //     endpoint: "v1/cryptocurrency/map",
+  //     listing_status: "active",
+  //     sort: "cmc_rank",
+  //     start,
+  //     limit,
+  //   },
   // });
+
+  // return { ...data, pageParam };
+
+  return new Promise<Response>((resolve) => {
+    setTimeout(() => {
+      resolve({ ...data, pageParam });
+    }, 500);
+  });
 };
 
 export const useInfiniteCryptoAssetsQuery = () => {

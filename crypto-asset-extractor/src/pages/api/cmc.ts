@@ -20,6 +20,10 @@ export default function handler(
       res.status(200).json(data);
     })
     .catch((err) => {
+      if (process.env.NODE_ENV === "development") {
+        res.status(400).json(err);
+      }
+
       res.status(400).json({
         name: err.name,
         message: err.message,

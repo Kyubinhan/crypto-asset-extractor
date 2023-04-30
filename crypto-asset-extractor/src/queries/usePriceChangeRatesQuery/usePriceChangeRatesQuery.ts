@@ -1,12 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
 
 import { QUERY_KEYS } from "src/queries";
 import data from "./data.json";
 
-type Response = CMCResponse<{ [id: string]: PriceChangeRate }>;
+type Response = CMCResponse<{ [symbol: string]: PriceChangeRate }>;
 
-const fetchPriceChangeRates = (symbols: string[], convert: string) => {
-  console.log(symbols, convert);
+const fetchPriceChangeRates = async (symbols: string[], convert: string) => {
+  // const { data } = await axios.get<Response>("api/cmc", {
+  //   params: {
+  //     endpoint: "v1/cryptocurrency/quotes/latest",
+  //     symbol: symbols.join(","),
+  //     aux: "cmc_rank",
+  //     convert,
+  //   },
+  // });
+
+  // return data;
 
   return new Promise<Response>((resolve) => {
     setTimeout(() => {
