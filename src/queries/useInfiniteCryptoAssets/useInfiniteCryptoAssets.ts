@@ -3,9 +3,9 @@ import { useInfiniteQuery } from "react-query";
 import { QUERY_KEYS } from "src/queries";
 import data from "./data.json";
 
-type Response = CMCResponse<CryptoAsset> & { pageParam: number };
+type Response = CMCResponse<CryptoAsset[]> & { pageParam: number };
 
-const TOTAL_COUNT = 20;
+const TOTAL_COUNT = 100;
 const SIZE = 15;
 export const CRYPTO_ASSET_TOTAL_PAGE = Math.floor(TOTAL_COUNT / SIZE) + 1;
 

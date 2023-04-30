@@ -6,5 +6,5 @@ interface CMCResponse<T> {
     elapsed: number;
     notice: null;
   };
-  data: T[];
+  data: T;
 }
