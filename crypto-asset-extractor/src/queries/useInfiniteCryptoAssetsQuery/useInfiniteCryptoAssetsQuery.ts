@@ -43,6 +43,5 @@ export const useInfiniteCryptoAssetsQuery = () => {
 
       return undefined;
     },
-    staleTime: Infinity,
   });
 };

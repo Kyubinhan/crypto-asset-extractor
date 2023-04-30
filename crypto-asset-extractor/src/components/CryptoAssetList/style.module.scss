@@ -1,0 +1,99 @@
+.list-wrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 20px;
+    width: 229px;
+    height: 80px;
+    position: relative;
+    background-color: var(--grayscale-white);
+    border: 1px solid var(--grayscale-grey-1);
+    border-radius: 4px;
+
+    &.selected {
+      background: var(--haru-purple-20);
+
+      .text {
+        gap: 6px;
+        align-items: center;
+        flex-direction: row;
+      }
+
+      .symbol {
+        font-size: 14px;
+      }
+    }
+
+    input {
+      width: 20px;
+      height: 20px;
+      top: 12px;
+      right: 12px;
+      position: absolute;
+      cursor: pointer;
+
+      &[type="checkbox"] {
+        accent-color: var(--haru-purple-100);
+      }
+    }
+
+    .text {
+      max-width: 125px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 100%;
+      text-transform: capitalize;
+      color: #000000;
+    }
+
+    .symbol {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 100%;
+      text-transform: uppercase;
+      color: var(--grayscale-grey-5);
+    }
+  }
+
+  .more-btn {
+    margin: 24px 0;
+    background-color: var(--grayscale-grey-0);
+    border: 0px;
+    border-radius: 4px;
+    height: 48px;
+    padding: 0 16px;
+
+    font-family: "Spoqa Han Sans Neo";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 48px;
+    text-align: center;
+    letter-spacing: -0.3px;
+
+    color: var(--grayscale-grey-5);
+
+    img {
+      margin-left: 12px;
+    }
+  }
+}

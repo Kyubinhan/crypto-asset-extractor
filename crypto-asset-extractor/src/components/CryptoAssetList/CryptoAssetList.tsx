@@ -1,9 +1,14 @@
+import clsx from "clsx";
+import Image from "next/image";
 import React from "react";
+
 import { SelectedSymbolState } from "src/hooks";
 import {
   CRYPTO_ASSET_TOTAL_PAGE,
   useInfiniteCryptoAssetsQuery,
 } from "src/queries";
+
+import styles from "./style.module.scss";
 
 interface Props {
   selected: SelectedSymbolState["selected"];
@@ -18,32 +23,44 @@ const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
   if (!data || hidden) return null;
 
   return (
-    <div>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {data.pages.map((group, pageIdx) => {
-          return (
-            <React.Fragment key={pageIdx}>
-              {group.data.map((asset) => (
-                <div key={asset.id} style={{ padding: 12 }}>
-                  <input
-                    type="checkbox"
-                    id="scales"
-                    name="scales"
-                    checked={Boolean(selected[asset.symbol])}
-                    onChange={() => toggle(asset.symbol)}
-                  />
-                  {asset.name} {asset.symbol}
-                </div>
-              ))}
-            </React.Fragment>
-          );
-        })}
+    <div className={styles["list-wrapper"]}>
+      <div className={styles["card-list"]}>
+        {data.pages.map((group, pageIdx) => (
+          <React.Fragment key={pageIdx}>
+            {group.data.map((asset) => {
+              const isSelected = Boolean(selected[asset.symbol]);
+
+              return (
+                <button
+                  key={asset.id}
+                  className={clsx(styles.card, {
+                    [styles.selected]: isSelected,
+                  })}
+                  onClick={() => toggle(asset.symbol)}
+                >
+                  <input type="checkbox" checked={isSelected} />
+                  <div className={styles.text}>
+                    <span className={styles.name}>{asset.name}</span>
+                    <span className={styles.symbol}>{asset.symbol}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </React.Fragment>
+        ))}
       </div>
       <button
+        className={styles["more-btn"]}
         onClick={() => fetchNextPage()}
         disabled={!hasNextPage || isFetching}
       >
-        더 보기({data.pages.length} / {CRYPTO_ASSET_TOTAL_PAGE})
+        더보기({data.pages.length}/{CRYPTO_ASSET_TOTAL_PAGE}){" "}
+        <Image
+          src="/images/chevron-arrow-down.svg"
+          width={10}
+          height={10}
+          alt="arrow down icon"
+        />
       </button>
     </div>
   );
