@@ -1,8 +1,9 @@
 import { create } from "zustand";
 
-interface SelectedSymbolState {
+export interface SelectedSymbolState {
   selected: Record<string, boolean>;
   toggle: (symbol: string) => void;
+  reset: () => void;
 }
 
 export const useSelectedSymbolStore = create<SelectedSymbolState>()((set) => ({
@@ -15,6 +16,10 @@ export const useSelectedSymbolStore = create<SelectedSymbolState>()((set) => ({
         selected: { ...state.selected, [symbol]: !prev },
       };
     }),
+  reset: () =>
+    set(() => ({
+      selected: {},
+    })),
 }));
 
 export const getSelectedSymbols = (selected: SelectedSymbolState["selected"]) =>

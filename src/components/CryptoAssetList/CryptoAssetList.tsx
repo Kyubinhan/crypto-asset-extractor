@@ -1,13 +1,15 @@
 import React from "react";
-import { useSelectedSymbolStore } from "src/hooks/useSelectedCryptoAssetStore";
+import { SelectedSymbolState } from "src/hooks";
 import { CRYPTO_ASSET_TOTAL_PAGE, useInfiniteCryptoAssets } from "src/queries";
 
-interface Props {}
+interface Props {
+  selected: SelectedSymbolState["selected"];
+  toggle: SelectedSymbolState["toggle"];
+}
 
-const CryptoAssetList: React.FC<Props> = () => {
+const CryptoAssetList: React.FC<Props> = ({ selected, toggle }) => {
   const { data, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCryptoAssets();
-  const { selected, toggle } = useSelectedSymbolStore();
 
   if (!data) return null;
 

@@ -1,23 +1,23 @@
 import React from "react";
-import {
-  getSelectedSymbols,
-  useSelectedSymbolStore,
-} from "src/hooks/useSelectedCryptoAssetStore";
+import { SelectedSymbolState } from "src/hooks";
 
 interface Props {
-  mode: "view" | "edit";
+  symbols: string[];
+  toggle: SelectedSymbolState["toggle"];
+  isToggleAble: boolean;
 }
 
-const SelectedSymbolList: React.FC<Props> = ({ mode }) => {
-  const { selected, toggle } = useSelectedSymbolStore();
-  const symbols = getSelectedSymbols(selected);
-
+const SelectedSymbolList: React.FC<Props> = ({
+  symbols,
+  toggle,
+  isToggleAble,
+}) => {
   return (
     <div style={{ marginTop: 12, display: "flex" }}>
       {symbols.map((symbol) => (
         <div key={symbol} style={{ padding: 4 }}>
           {symbol}
-          {mode === "edit" && <button onClick={() => toggle(symbol)}>x</button>}
+          {isToggleAble && <button onClick={() => toggle(symbol)}>x</button>}
         </div>
       ))}
     </div>
