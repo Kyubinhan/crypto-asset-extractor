@@ -1,0 +1,86 @@
+.timestamps {
+  padding: 16px;
+  margin: 32px 24px 24px 24px;
+  background: var(--haru-purple-5);
+  border-radius: 4px;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    .label {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 160%;
+      color: var(--grayscale-grey-7);
+    }
+
+    .timestamp {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 160%;
+      color: var(--grayscale-grey-7);
+    }
+  }
+}
+
+.table {
+  > div {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 2fr 1.5fr 1.5fr;
+  }
+
+  .header {
+    padding: 8px 0;
+    border-top: 1px solid var(--grayscale-grey-1);
+    border-bottom: 1px solid var(--grayscale-grey-1);
+
+    span {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 160%;
+      color: var(--grayscale-grey-5);
+
+      &:first-child {
+        font-family: "Spoqa Han Sans Neo";
+      }
+
+      &:nth-child(2) {
+        font-family: "Spoqa Han Sans Neo";
+        text-align: right;
+      }
+
+      &:nth-child(3),
+      &:nth-child(4) {
+        text-align: right;
+      }
+    }
+  }
+
+  .row {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--grayscale-grey-1);
+
+    span {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 160%;
+      color: var(--grayscale-grey-8);
+
+      &:nth-child(2) {
+        text-align: right;
+      }
+
+      &:nth-child(3),
+      &:nth-child(4) {
+        color: var(--state-sucess-default);
+        text-align: right;
+      }
+
+      &.minus {
+        color: var(--state-error-default);
+      }
+    }
+  }
+}

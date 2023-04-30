@@ -7,10 +7,14 @@
   --grayscale-grey-1: #eef0f2;
   --grayscale-grey-5: #72778e;
   --grayscale-grey-6: #515774;
+  --grayscale-grey-7: #3a4162;
   --grayscale-grey-8: #171f46;
+  --haru-purple-5: #f7f8ff;
   --haru-purple-10: #eef0fd;
   --haru-purple-20: #e1e4fc;
   --haru-purple-100: #5a41f5;
+  --state-sucess-default: #45ba8b;
+  --state-error-default: #ca303c;
 }
 
 * {

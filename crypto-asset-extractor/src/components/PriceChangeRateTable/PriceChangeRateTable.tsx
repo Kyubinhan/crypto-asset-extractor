@@ -1,5 +1,10 @@
+import clsx from "clsx";
+import dayjs from "dayjs";
 import React from "react";
+
 import { usePriceChangeRatesQuery } from "src/queries";
+
+import styles from "./style.module.scss";
 
 interface Props {
   symbols: string[];
@@ -18,20 +23,55 @@ const PriceChangeRateTable: React.FC<Props> = ({
 
   const cryptoAssets = Object.values(assetMap);
 
-  return (
-    <div style={{ marginTop: 12 }}>
-      Requested Time {status.timestamp}
-      {cryptoAssets.map((asset) => {
-        const quote = asset.quote[convert];
+  const requestTime = dayjs(status.timestamp)
+    .format("YYYY.MM.DD HH:mm:ss.SSS")
+    .slice(0, -1);
+  const responseTime = dayjs(status.timestamp)
+    .add(status.elapsed, "millisecond")
+    .format("YYYY.MM.DD HH:mm:ss.SSS")
+    .slice(0, -1);
 
-        return (
-          <div key={asset.id}>
-            {asset.name} ₩{quote.price.toFixed(2)}{" "}
-            {quote.percent_change_24h.toFixed(2)}%{" "}
-            {quote.percent_change_7d.toFixed(2)}%
-          </div>
-        );
-      })}
+  return (
+    <div>
+      <div className={styles.timestamps}>
+        <div>
+          <span className={styles.label}>Request Time</span>
+          <span className={styles.timestamp}>{requestTime}</span>
+        </div>
+        <div>
+          <span className={styles.label}>Response Time</span>
+          <span className={styles.timestamp}>{responseTime}</span>
+        </div>
+      </div>
+      <div className={styles.table}>
+        <div className={styles.header}>
+          <span>코인</span>
+          <span>가격</span>
+          <span>24h(%)</span>
+          <span>7d(%)</span>
+        </div>
+        {cryptoAssets.map((asset) => {
+          const quote = asset.quote[convert];
+          const price = new Intl.NumberFormat("en-US", {
+            maximumFractionDigits: 2,
+          }).format(quote.price);
+          const pc24h = quote.percent_change_24h;
+          const pc7d = quote.percent_change_7d;
+
+          return (
+            <div key={asset.id} className={styles.row}>
+              <span>{asset.symbol}</span>
+              <span>₩{price}</span>
+              <span className={clsx({ [styles.minus]: pc24h < 0 })}>
+                {pc24h.toFixed(2)}%
+              </span>
+              <span className={clsx({ [styles.minus]: pc7d < 0 })}>
+                {pc7d.toFixed(2)}%
+              </span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
