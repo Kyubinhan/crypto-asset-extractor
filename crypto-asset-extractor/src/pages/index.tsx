@@ -3,8 +3,8 @@ import Head from "next/head";
 import { useState } from "react";
 
 import CoinCardListView from "src/components/CoinCardListView";
+import CoinPriceQuoteTable from "src/components/CoinPriceQuoteTable";
 import Header from "src/components/Header";
-import PriceChangeRateTable from "src/components/PriceChangeRateTable";
 import SelectedSymbolList from "src/components/SelectedSymbolList";
 import StopWatch from "src/components/StopWatch";
 import TopBar from "src/components/TopBar";
@@ -54,7 +54,7 @@ export default function Home() {
             <StopWatch handleStart={handleStart} handleReset={handleReset} />
           </>
         )}
-        {isExtractMode && <PriceChangeRateTable symbols={selectedSymbols} />}
+        {isExtractMode && <CoinPriceQuoteTable symbols={selectedSymbols} />}
       </main>
     </>
   );

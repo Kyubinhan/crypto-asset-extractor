@@ -12,10 +12,7 @@ interface Props {
   convert?: string;
 }
 
-const PriceChangeRateTable: React.FC<Props> = ({
-  symbols,
-  convert = "KRW",
-}) => {
+const CoinPriceQuoteTable: React.FC<Props> = ({ symbols, convert = "KRW" }) => {
   const { data } = useCoinPriceQuotesQuery({ symbols, convert });
   const { data: logoMap } = useCoinLogoMapQuery();
 
@@ -84,4 +81,4 @@ const PriceChangeRateTable: React.FC<Props> = ({
   );
 };
 
-export default PriceChangeRateTable;
+export default CoinPriceQuoteTable;
