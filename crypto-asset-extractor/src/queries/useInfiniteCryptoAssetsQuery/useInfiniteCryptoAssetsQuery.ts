@@ -15,7 +15,7 @@ const fetchCryptoAssets = async ({ pageParam = 0 }) => {
     return new Promise<Response>((resolve) => {
       setTimeout(() => {
         resolve({ ...mockData, pageParam });
-      }, 500);
+      }, 1000);
     });
   }
 

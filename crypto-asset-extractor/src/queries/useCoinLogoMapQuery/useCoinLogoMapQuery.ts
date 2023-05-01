@@ -4,7 +4,7 @@ import axios from "axios";
 import { QUERY_KEYS } from "src/queries";
 
 const fetchLogos = async () => {
-  const { data } = await axios.get("api/coinLogoMap");
+  const { data } = await axios.get<Record<string, string>>("api/coinLogoMap");
 
   return data;
 };

@@ -59,16 +59,14 @@ const PriceChangeRateTable: React.FC<Props> = ({
           }).format(quote.price);
           const pc24h = quote.percent_change_24h;
           const pc7d = quote.percent_change_7d;
+          const logoUrl = logoMap?.[asset.symbol];
 
           return (
             <div key={asset.id} className={styles.row}>
               <span>
-                <Image
-                  src={logoMap[asset.symbol]}
-                  width={24}
-                  height={24}
-                  alt="coin logo"
-                />
+                {logoUrl && (
+                  <Image src={logoUrl} width={24} height={24} alt="coin logo" />
+                )}
                 {asset.symbol}
               </span>
               <span>₩{price}</span>

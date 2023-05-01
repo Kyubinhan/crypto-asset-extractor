@@ -31,6 +31,7 @@ const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
           <React.Fragment key={pageIdx}>
             {group.data.map((asset) => {
               const isSelected = Boolean(selected[asset.symbol]);
+              const logoUrl = logoMap?.[asset.symbol];
 
               return (
                 <button
@@ -46,12 +47,14 @@ const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
                     // To silence the onChange missing console error
                     onChange={() => {}}
                   />
-                  <Image
-                    src={logoMap[asset.symbol]}
-                    width={32}
-                    height={32}
-                    alt="coin logo"
-                  />
+                  {logoUrl && (
+                    <Image
+                      src={logoUrl}
+                      width={32}
+                      height={32}
+                      alt="coin logo"
+                    />
+                  )}
                   <div className={styles.text}>
                     <span className={styles.name}>{asset.name}</span>
                     <span className={styles.symbol}>{asset.symbol}</span>
