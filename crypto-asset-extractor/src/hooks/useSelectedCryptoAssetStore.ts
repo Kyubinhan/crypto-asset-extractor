@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import { create } from "zustand";
 
 export interface SelectedSymbolState {
@@ -8,14 +9,15 @@ export interface SelectedSymbolState {
 
 export const useSelectedSymbolStore = create<SelectedSymbolState>()((set) => ({
   selected: {},
-  toggle: (symbol) =>
-    set((state) => {
-      const prev = Boolean(state.selected[symbol]);
-
-      return {
-        selected: { ...state.selected, [symbol]: !prev },
-      };
-    }),
+  toggle: (symbol) => {
+    set(
+      produce((state: SelectedSymbolState) => {
+        const prev = Boolean(state.selected[symbol]);
+        // Toggle the particular symbol's state
+        state.selected[symbol] = !prev;
+      })
+    );
+  },
   reset: () =>
     set({
       selected: {},
