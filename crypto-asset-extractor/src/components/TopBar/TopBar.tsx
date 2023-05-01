@@ -16,4 +16,4 @@ const TopBar: React.FC = () => {
   );
 };
 
-export default TopBar;
+export default React.memo(TopBar);
