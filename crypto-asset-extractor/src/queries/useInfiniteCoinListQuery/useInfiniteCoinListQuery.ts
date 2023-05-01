@@ -7,10 +7,10 @@ import mockData from "./data.json";
 type Response = CMCResponse<Coin[]> & { pageParam: number };
 
 const TOTAL_COUNT = 100;
-const SIZE = 15;
-export const CRYPTO_ASSET_TOTAL_PAGE = Math.floor(TOTAL_COUNT / SIZE) + 1;
+export const getCoinListTotalPage = (pageSize: number) =>
+  Math.round(TOTAL_COUNT / pageSize);
 
-const fetchPaginatedCoinList = async ({ pageParam = 0 }) => {
+const fetchPaginatedCoinList = async (pageParam: number, pageSize: number) => {
   if (process.env.NEXT_PUBLIC_USE_CMC_MOCK_DATA === "true") {
     return new Promise<Response>((resolve) => {
       setTimeout(() => {
@@ -19,8 +19,8 @@ const fetchPaginatedCoinList = async ({ pageParam = 0 }) => {
     });
   }
 
-  const start = 1 + pageParam * SIZE;
-  const limit = Math.min(SIZE * (pageParam + 1), TOTAL_COUNT);
+  const start = 1 + pageParam * pageSize;
+  const limit = Math.min(pageSize * (pageParam + 1), TOTAL_COUNT);
 
   const { data } = await axios.get<Response>("/api/cmc", {
     params: {
@@ -35,14 +35,19 @@ const fetchPaginatedCoinList = async ({ pageParam = 0 }) => {
   return { ...data, pageParam };
 };
 
-export const useInfiniteCoinListQuery = () => {
+type QueryArgs = {
+  pageSize: number;
+};
+export const useInfiniteCoinListQuery = ({ pageSize }: QueryArgs) => {
   return useInfiniteQuery(
-    [QUERY_KEYS.PAGINATED_COIN_LIST],
-    fetchPaginatedCoinList,
+    [QUERY_KEYS.PAGINATED_COIN_LIST, pageSize],
+    ({ pageParam = 0 }) => fetchPaginatedCoinList(pageParam, pageSize),
     {
       getNextPageParam: ({ pageParam = 0 }) => {
         const currPage = pageParam + 1;
-        if (currPage < CRYPTO_ASSET_TOTAL_PAGE) {
+        const totalPage = getCoinListTotalPage(pageSize);
+
+        if (currPage < totalPage) {
           return pageParam + 1;
         }
 

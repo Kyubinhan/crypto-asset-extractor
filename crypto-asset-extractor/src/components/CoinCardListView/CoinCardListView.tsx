@@ -3,13 +3,17 @@ import React from "react";
 
 import CoinCard from "src/components/CoinCard";
 import MoreButton from "src/components/CoinCardListView/MoreButton";
+import { useMediaQuery } from "src/hooks";
 import {
-  CRYPTO_ASSET_TOTAL_PAGE,
+  getCoinListTotalPage,
   useCoinLogoMapQuery,
   useInfiniteCoinListQuery,
 } from "src/queries";
 
 import S from "./style.module.scss";
+
+const DESKTOP_PAGE_SIZE = 15;
+const MOBILE_PAGE_SIZE = 5;
 
 interface Props {
   selected: Record<string, boolean>;
@@ -18,8 +22,11 @@ interface Props {
 }
 
 const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
+  const isMobile = useMediaQuery("(max-width: 375px)");
+  const pageSize = isMobile ? MOBILE_PAGE_SIZE : DESKTOP_PAGE_SIZE;
+
   const { data, isLoading, isFetching, fetchNextPage, hasNextPage } =
-    useInfiniteCoinListQuery();
+    useInfiniteCoinListQuery({ pageSize });
   const { data: logoMap } = useCoinLogoMapQuery();
 
   if (isLoading) {
@@ -51,7 +58,7 @@ const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
         ))}
       </div>
       <MoreButton
-        label={`더보기(${data.pages.length}/${CRYPTO_ASSET_TOTAL_PAGE})`}
+        label={`더보기(${data.pages.length}/${getCoinListTotalPage(pageSize)})`}
         handleClick={fetchNextPage}
         disabled={!hasNextPage || isFetching}
       />
