@@ -1,7 +1,7 @@
-import Image from "next/image";
 import React from "react";
 
 import CoinCard from "src/components/CoinCard";
+import MoreButton from "src/components/CoinCardListView/MoreButton";
 import {
   CRYPTO_ASSET_TOTAL_PAGE,
   useCoinLogoMapQuery,
@@ -45,19 +45,11 @@ const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
           </React.Fragment>
         ))}
       </div>
-      <button
-        className={styles["more-btn"]}
-        onClick={() => fetchNextPage()}
+      <MoreButton
+        label={`더보기(${data.pages.length}/${CRYPTO_ASSET_TOTAL_PAGE})`}
+        handleClick={fetchNextPage}
         disabled={!hasNextPage || isFetching}
-      >
-        더보기({data.pages.length}/{CRYPTO_ASSET_TOTAL_PAGE}){" "}
-        <Image
-          src="/images/chevron-arrow-down.svg"
-          width={10}
-          height={10}
-          alt="arrow down icon"
-        />
-      </button>
+      />
     </div>
   );
 };

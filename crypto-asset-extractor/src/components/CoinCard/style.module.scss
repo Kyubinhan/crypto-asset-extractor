@@ -5,7 +5,7 @@
   box-sizing: border-box;
   padding: 0 20px;
   width: 229px;
-  height: 80px;
+  min-height: 80px;
   position: relative;
   background-color: var(--grayscale-white);
   border: 1px solid var(--grayscale-grey-1);
