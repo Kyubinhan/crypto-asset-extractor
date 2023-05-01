@@ -1,0 +1,13 @@
+$mobile: 375px;
+
+@mixin breakpoint($size) {
+  @if type-of($size) == number {
+    @media only screen and (max-width: $size) {
+      @content;
+    }
+  } @else if $size == mobile {
+    @media only screen and (max-width: $mobile) {
+      @content;
+    }
+  }
+}

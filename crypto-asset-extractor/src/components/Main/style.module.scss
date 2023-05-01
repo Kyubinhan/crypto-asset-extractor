@@ -1,4 +1,10 @@
+@use "mixins";
+
 .main {
   width: 768px;
   margin: 0 auto;
+
+  @include mixins.breakpoint(mobile) {
+    width: 100%;
+  }
 }

@@ -1,3 +1,5 @@
+@use "mixins";
+
 .symbol-list {
   display: flex;
   flex-wrap: wrap;
@@ -5,4 +7,11 @@
   column-gap: 16px;
   padding: 24px;
   background-color: var(--haru-purple-10);
+
+  @include mixins.breakpoint(mobile) {
+    flex-wrap: nowrap;
+    column-gap: 8px;
+    width: 100%;
+    overflow-x: auto;
+  }
 }

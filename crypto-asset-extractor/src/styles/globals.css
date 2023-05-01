@@ -1,5 +1,5 @@
-/* Include Spoqa Han Sans Neo font */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css") (max-width: 375px);
 
 :root {
   --grayscale-white: #ffffff;

@@ -1,3 +1,5 @@
+@use "mixins";
+
 .header {
   margin-top: 56px;
   padding: 0 24px;
@@ -10,10 +12,16 @@
     line-height: 125%;
     letter-spacing: -1px;
     color: var(--grayscale-grey-8);
+    word-break: keep-all;
+
+    @include mixins.breakpoint(mobile) {
+      font-size: 28px;
+    }
   }
 
   h2 {
     margin-top: 12px;
+    margin-bottom: 40px;
     font-family: "Spoqa Han Sans Neo";
     font-style: normal;
     font-weight: 400;
@@ -21,5 +29,19 @@
     line-height: 125%;
     letter-spacing: -0.3px;
     color: var(--grayscale-grey-6);
+    word-break: keep-all;
+
+    @include mixins.breakpoint(mobile) {
+      margin-bottom: 32px;
+    }
+  }
+
+  @include mixins.breakpoint(mobile) {
+    margin-top: 32px;
+
+    h1,
+    h2 {
+      font-family: "Pretendard";
+    }
   }
 }
