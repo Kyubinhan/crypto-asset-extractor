@@ -6,9 +6,9 @@ import mockData from "./data.json";
 
 type Response = CMCResponse<Coin[]> & { pageParam: number };
 
-const TOTAL_COUNT = 100;
+const TOTAL_NUM_OF_COINS = 100;
 export const getCoinListTotalPage = (pageSize: number) =>
-  Math.round(TOTAL_COUNT / pageSize);
+  Math.ceil(TOTAL_NUM_OF_COINS / pageSize);
 
 const fetchPaginatedCoinList = async (pageParam: number, pageSize: number) => {
   if (process.env.NEXT_PUBLIC_USE_CMC_MOCK_DATA === "true") {
@@ -20,7 +20,7 @@ const fetchPaginatedCoinList = async (pageParam: number, pageSize: number) => {
   }
 
   const start = 1 + pageParam * pageSize;
-  const limit = Math.min(pageSize * (pageParam + 1), TOTAL_COUNT);
+  const limit = Math.min(pageSize * (pageParam + 1), TOTAL_NUM_OF_COINS);
 
   const { data } = await axios.get<Response>("/api/cmc", {
     params: {
