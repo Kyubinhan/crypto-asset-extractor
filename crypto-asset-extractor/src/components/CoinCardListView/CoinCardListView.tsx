@@ -1,25 +1,24 @@
-import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
 
-import { SelectedSymbolState } from "src/hooks";
+import CoinCard from "src/components/CoinCard";
 import {
   CRYPTO_ASSET_TOTAL_PAGE,
   useCoinLogoMapQuery,
-  useInfiniteCryptoAssetsQuery,
+  useInfiniteCoinListQuery,
 } from "src/queries";
 
 import styles from "./style.module.scss";
 
 interface Props {
-  selected: SelectedSymbolState["selected"];
-  toggle: SelectedSymbolState["toggle"];
+  selected: Record<string, boolean>;
+  toggle: (symbol: string) => void;
   hidden: boolean;
 }
 
 const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
   const { data, isFetching, fetchNextPage, hasNextPage } =
-    useInfiniteCryptoAssetsQuery();
+    useInfiniteCoinListQuery();
   const { data: logoMap } = useCoinLogoMapQuery();
 
   if (!data || hidden) return null;
@@ -29,37 +28,18 @@ const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
       <div className={styles["card-list"]}>
         {data.pages.map((group, pageIdx) => (
           <React.Fragment key={pageIdx}>
-            {group.data.map((asset) => {
-              const isSelected = Boolean(selected[asset.symbol]);
-              const logoUrl = logoMap?.[asset.symbol];
+            {group.data.map((coin) => {
+              const isSelected = Boolean(selected[coin.symbol]);
+              const logoUrl = logoMap?.[coin.symbol];
 
               return (
-                <button
-                  key={asset.id}
-                  className={clsx(styles.card, {
-                    [styles.selected]: isSelected,
-                  })}
-                  onClick={() => toggle(asset.symbol)}
-                >
-                  <input
-                    type="checkbox"
-                    checked={isSelected}
-                    // To silence the onChange missing console error
-                    onChange={() => {}}
-                  />
-                  {logoUrl && (
-                    <Image
-                      src={logoUrl}
-                      width={32}
-                      height={32}
-                      alt="coin logo"
-                    />
-                  )}
-                  <div className={styles.text}>
-                    <span className={styles.name}>{asset.name}</span>
-                    <span className={styles.symbol}>{asset.symbol}</span>
-                  </div>
-                </button>
+                <CoinCard
+                  key={coin.id}
+                  coin={coin}
+                  isSelected={isSelected}
+                  logoUrl={logoUrl}
+                  toggle={toggle}
+                />
               );
             })}
           </React.Fragment>
