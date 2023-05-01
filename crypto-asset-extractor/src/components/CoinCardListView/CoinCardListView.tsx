@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 import CoinCard from "src/components/CoinCard";
@@ -8,7 +9,7 @@ import {
   useInfiniteCoinListQuery,
 } from "src/queries";
 
-import styles from "./style.module.scss";
+import S from "./style.module.scss";
 
 interface Props {
   selected: Record<string, boolean>;
@@ -17,15 +18,19 @@ interface Props {
 }
 
 const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
-  const { data, isFetching, fetchNextPage, hasNextPage } =
+  const { data, isLoading, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCoinListQuery();
   const { data: logoMap } = useCoinLogoMapQuery();
 
-  if (!data || hidden) return null;
+  if (isLoading) {
+    return <div className={S.loading}>Loading...</div>;
+  }
+
+  if (!data) return null;
 
   return (
-    <div className={styles["list-wrapper"]}>
-      <div className={styles["card-list"]}>
+    <div className={clsx(S["card-list-view"], { [S.hidden]: hidden })}>
+      <div className={S["card-list"]}>
         {data.pages.map((group, pageIdx) => (
           <React.Fragment key={pageIdx}>
             {group.data.map((coin) => {

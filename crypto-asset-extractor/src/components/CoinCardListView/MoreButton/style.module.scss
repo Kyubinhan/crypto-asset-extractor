@@ -16,6 +16,10 @@
 
   color: var(--grayscale-grey-5);
 
+  &:hover {
+    color: var(--grayscale-grey-6);
+  }
+
   img {
     margin-left: 12px;
   }
