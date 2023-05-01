@@ -1,0 +1,26 @@
+.symbol {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 4px 5px 12px;
+  gap: 10px;
+
+  min-width: 87px;
+
+  background: var(--grayscale-white);
+  border: 1px solid var(--haru-purple-20);
+  border-radius: 4px;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+
+  color: var(--haru-purple-100);
+
+  button {
+    width: 24px;
+    height: 24px;
+    background-color: var(--grayscale-white);
+    border: none;
+  }
+}

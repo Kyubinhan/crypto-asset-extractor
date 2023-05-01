@@ -1,37 +1,28 @@
-import Image from "next/image";
 import React from "react";
 
-import { SelectedSymbolState } from "src/hooks";
-
-import styles from "./style.module.scss";
+import SelectedSymbol from "src/components/SelectedSymbol/SelectedSymbol";
+import S from "./style.module.scss";
 
 interface Props {
   symbols: string[];
-  toggle: SelectedSymbolState["toggle"];
-  isToggleAble: boolean;
+  toggle: (symbol: string) => void;
+  canUnselect: boolean;
 }
 
 const SelectedSymbolList: React.FC<Props> = ({
   symbols,
   toggle,
-  isToggleAble,
+  canUnselect,
 }) => {
   return (
-    <div className={styles.list}>
+    <div className={S["symbol-list"]}>
       {symbols.sort().map((symbol) => (
-        <div key={symbol} className={styles.symbol}>
-          {symbol}
-          {isToggleAble && (
-            <button onClick={() => toggle(symbol)}>
-              <Image
-                src="/images/close.svg"
-                width={10}
-                height={10}
-                alt="close icon"
-              />
-            </button>
-          )}
-        </div>
+        <SelectedSymbol
+          key={symbol}
+          canUnselect={canUnselect}
+          symbol={symbol}
+          toggle={toggle}
+        />
       ))}
     </div>
   );

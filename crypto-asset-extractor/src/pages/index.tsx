@@ -49,7 +49,7 @@ export default function Home() {
             <SelectedSymbolList
               symbols={selectedSymbols}
               toggle={toggle}
-              isToggleAble={!isExtractMode}
+              canUnselect={!isExtractMode}
             />
             <StopWatch handleStart={handleStart} handleReset={handleReset} />
           </>
