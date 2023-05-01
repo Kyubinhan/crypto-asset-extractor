@@ -17,7 +17,7 @@ interface Props {
   hidden: boolean;
 }
 
-const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
+const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
   const { data, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCryptoAssetsQuery();
   const { data: logoMap } = useCoinLogoMapQuery();
@@ -82,4 +82,4 @@ const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
   );
 };
 
-export default CryptoAssetList;
+export default CoinCardListView;

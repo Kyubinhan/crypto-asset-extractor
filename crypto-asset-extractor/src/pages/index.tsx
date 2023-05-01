@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import { useState } from "react";
 
-import CryptoAssetList from "src/components/CryptoAssetList";
+import CoinCardListView from "src/components/CoinCardListView";
 import Header from "src/components/Header";
 import PriceChangeRateTable from "src/components/PriceChangeRateTable";
 import SelectedSymbolList from "src/components/SelectedSymbolList";
@@ -39,7 +39,7 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <TopBar />
         <Header />
-        <CryptoAssetList
+        <CoinCardListView
           selected={selected}
           toggle={toggle}
           hidden={isExtractMode}
