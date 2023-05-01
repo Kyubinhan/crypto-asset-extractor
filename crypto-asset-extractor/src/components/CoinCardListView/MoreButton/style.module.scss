@@ -20,6 +20,12 @@
     color: var(--grayscale-grey-6);
   }
 
+  &:disabled {
+    opacity: 0.6;
+    color: var(--grayscale-grey-5);
+    cursor: initial;
+  }
+
   img {
     margin-left: 12px;
   }
