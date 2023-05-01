@@ -1,9 +1,9 @@
 export * from "./useCoinLogoMapQuery";
-export * from "./useInfiniteCryptoAssetsQuery";
-export * from "./usePriceChangeRatesQuery";
+export * from "./useCoinPriceQuotesQuery";
+export * from "./useInfiniteCoinListQuery";
 
 export const QUERY_KEYS = {
-  CRYPTO_ASSETS: "cryptos-assets",
-  PRICE_CHANGE_RATES: "price-change-rates",
+  PAGINATED_COIN_LIST: "paginated-coin-list",
+  COIN_PRICE_Quotes: "coin-price-quotes",
   COIN_LOGO_MAP: "coin-logo-map",
 };

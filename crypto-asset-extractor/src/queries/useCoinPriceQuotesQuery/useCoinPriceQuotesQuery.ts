@@ -4,9 +4,9 @@ import axios from "axios";
 import { QUERY_KEYS } from "src/queries";
 import mockData from "./data.json";
 
-type Response = CMCResponse<{ [symbol: string]: PriceChangeRate }>;
+type Response = CMCResponse<{ [symbol: string]: CoinPriceQuote }>;
 
-const fetchPriceChangeRates = async (symbols: string[], convert: string) => {
+const fetchCoinPriceQuotes = async (symbols: string[], convert: string) => {
   if (process.env.NEXT_PUBLIC_USE_CMC_MOCK_DATA === "true") {
     return new Promise<Response>((resolve) => {
       setTimeout(() => {
@@ -31,10 +31,10 @@ type QueryArgs = {
   symbols: string[];
   convert: string;
 };
-export const usePriceChangeRatesQuery = ({ symbols, convert }: QueryArgs) => {
+export const useCoinPriceQuotesQuery = ({ symbols, convert }: QueryArgs) => {
   return useQuery(
-    [QUERY_KEYS.PRICE_CHANGE_RATES, symbols, convert],
-    () => fetchPriceChangeRates(symbols, convert),
+    [QUERY_KEYS.COIN_PRICE_Quotes, symbols, convert],
+    () => fetchCoinPriceQuotes(symbols, convert),
     {
       refetchInterval: 5 * 1000, // 5 seconds
       enabled: symbols.length > 0,

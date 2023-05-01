@@ -1,4 +1,12 @@
-type Quote = {
+type Coin = {
+  id: number;
+  rank: number;
+  name: string;
+  symbol: string;
+  slug: string;
+};
+
+type QuoteByFiat = {
   [convert: string]: {
     price: number;
     percent_change_24h: number;
@@ -7,10 +15,10 @@ type Quote = {
   };
 };
 
-type PriceChangeRate = {
+type CoinPriceQuote = {
   id: number;
   name: string;
   symbol: string;
   cmc_rank: number;
-  quote: Quote;
+  quote: QuoteByFiat;
 };

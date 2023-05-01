@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import React from "react";
 
-import { useCoinLogoMapQuery, usePriceChangeRatesQuery } from "src/queries";
+import { useCoinLogoMapQuery, useCoinPriceQuotesQuery } from "src/queries";
 
 import styles from "./style.module.scss";
 
@@ -16,7 +16,7 @@ const PriceChangeRateTable: React.FC<Props> = ({
   symbols,
   convert = "KRW",
 }) => {
-  const { data } = usePriceChangeRatesQuery({ symbols, convert });
+  const { data } = useCoinPriceQuotesQuery({ symbols, convert });
   const { data: logoMap } = useCoinLogoMapQuery();
 
   if (!data) return null;
