@@ -1,6 +1,6 @@
 ### Kyubin Han's submission
 
-App can be accessed [here](https://crypto-asset-extractor-7pldkspaa-kyubinhan.vercel.app/).
+App can be accessed [here](https://crypto-asset-extractor-git-main-kyubinhan.vercel.app).
 
 Notes:
 
