@@ -56,11 +56,11 @@
       color: var(--grayscale-grey-5);
 
       &:first-child {
-        font-family: "Spoqa Han Sans Neo";
+        font-family: var(--korean-font);
       }
 
       &:nth-child(2) {
-        font-family: "Spoqa Han Sans Neo";
+        font-family: var(--korean-font);
         text-align: right;
       }
 
