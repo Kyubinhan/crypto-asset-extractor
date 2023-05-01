@@ -2,11 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { QUERY_KEYS } from "src/queries";
-// import data from "./data.json";
+import mockData from "./data.json";
 
 type Response = CMCResponse<{ [symbol: string]: PriceChangeRate }>;
 
 const fetchPriceChangeRates = async (symbols: string[], convert: string) => {
+  if (process.env.NEXT_PUBLIC_USE_CMC_MOCK_DATA === "true") {
+    return new Promise<Response>((resolve) => {
+      setTimeout(() => {
+        resolve(mockData);
+      }, 200);
+    });
+  }
+
   const { data } = await axios.get<Response>("api/cmc", {
     params: {
       endpoint: "v1/cryptocurrency/quotes/latest",
@@ -17,12 +25,6 @@ const fetchPriceChangeRates = async (symbols: string[], convert: string) => {
   });
 
   return data;
-
-  // return new Promise<Response>((resolve) => {
-  //   setTimeout(() => {
-  //     resolve(data);
-  //   }, 200);
-  // });
 };
 
 type QueryArgs = {

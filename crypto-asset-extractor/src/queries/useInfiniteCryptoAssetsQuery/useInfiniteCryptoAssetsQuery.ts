@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { QUERY_KEYS } from "src/queries";
-// import data from "./data.json";
+import mockData from "./data.json";
 
 type Response = CMCResponse<CryptoAsset[]> & { pageParam: number };
 
@@ -11,6 +11,14 @@ const SIZE = 15;
 export const CRYPTO_ASSET_TOTAL_PAGE = Math.floor(TOTAL_COUNT / SIZE) + 1;
 
 const fetchCryptoAssets = async ({ pageParam = 0 }) => {
+  if (process.env.NEXT_PUBLIC_USE_CMC_MOCK_DATA === "true") {
+    return new Promise<Response>((resolve) => {
+      setTimeout(() => {
+        resolve({ ...mockData, pageParam });
+      }, 500);
+    });
+  }
+
   const start = 1 + pageParam * SIZE;
   const limit = Math.min(SIZE * (pageParam + 1), TOTAL_COUNT);
 
@@ -25,12 +33,6 @@ const fetchCryptoAssets = async ({ pageParam = 0 }) => {
   });
 
   return { ...data, pageParam };
-
-  // return new Promise<Response>((resolve) => {
-  //   setTimeout(() => {
-  //     resolve({ ...data, pageParam });
-  //   }, 500);
-  // });
 };
 
 export const useInfiniteCryptoAssetsQuery = () => {
