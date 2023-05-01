@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
+import { useState } from "react";
 
 import CryptoAssetList from "src/components/CryptoAssetList";
 import Header from "src/components/Header";
@@ -7,28 +8,23 @@ import PriceChangeRateTable from "src/components/PriceChangeRateTable";
 import SelectedSymbolList from "src/components/SelectedSymbolList";
 import StopWatch from "src/components/StopWatch";
 import TopBar from "src/components/TopBar";
-import {
-  getSelectedSymbols,
-  useExtractQueryParam,
-  useSelectedSymbolStore,
-} from "src/hooks";
+import { getSelectedSymbols, useSelectedSymbolStore } from "src/hooks";
 
 import styles from "src/styles/Home.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { extract, setExtractQueryParam } = useExtractQueryParam();
   const { selected, toggle, reset } = useSelectedSymbolStore();
+  const [isExtractMode, setExtractMode] = useState(false);
 
   const selectedSymbols = getSelectedSymbols(selected);
-  const isExtractMode = Boolean(extract);
 
   const handleStart = () => {
-    setExtractQueryParam(selectedSymbols.join(","));
+    setExtractMode(true);
   };
   const handleReset = () => {
-    setExtractQueryParam("");
+    setExtractMode(false);
     reset();
   };
 
