@@ -1,6 +1,10 @@
 const fs = require("fs");
 
-const CMC_API_KEY = "your-api-key";
+const CMC_API_KEY = "";
+if (!CMC_API_KEY) {
+  throw new Error("CoinMarketCap API key is required!");
+}
+
 const headers = {
   "Content-Type": "application/json",
   "X-CMC_PRO_API_KEY": CMC_API_KEY,
