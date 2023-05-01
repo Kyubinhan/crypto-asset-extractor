@@ -1,0 +1,25 @@
+.timestamps {
+  padding: 16px;
+  margin: 32px 24px 24px 24px;
+  background: var(--haru-purple-5);
+  border-radius: 4px;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    .label {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 160%;
+      color: var(--grayscale-grey-7);
+    }
+
+    .timestamp {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 160%;
+      color: var(--grayscale-grey-7);
+    }
+  }
+}

@@ -25,13 +25,9 @@ const CoinCardListView: React.FC<Props> = ({ selected, toggle, hidden }) => {
   const isMobile = useMediaQuery("(max-width: 375px)");
   const pageSize = isMobile ? MOBILE_PAGE_SIZE : DESKTOP_PAGE_SIZE;
 
-  const { data, isLoading, isFetching, fetchNextPage, hasNextPage } =
+  const { data, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCoinListQuery({ pageSize });
   const { data: logoMap } = useCoinLogoMapQuery();
-
-  if (isLoading) {
-    return <div className={S.loading}>Loading...</div>;
-  }
 
   if (!data) return null;
 

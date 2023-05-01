@@ -1,31 +1,5 @@
 @use "mixins";
 
-.timestamps {
-  padding: 16px;
-  margin: 32px 24px 24px 24px;
-  background: var(--haru-purple-5);
-  border-radius: 4px;
-
-  div {
-    display: flex;
-    justify-content: space-between;
-
-    .label {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 160%;
-      color: var(--grayscale-grey-7);
-    }
-
-    .timestamp {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 160%;
-      color: var(--grayscale-grey-7);
-    }
-  }
-}
-
 .table {
   margin-bottom: 16px;
 
@@ -67,38 +41,6 @@
       &:nth-child(3),
       &:nth-child(4) {
         text-align: right;
-      }
-    }
-  }
-
-  .row {
-    padding: 18px 0;
-    border-bottom: 1px solid var(--grayscale-grey-1);
-
-    span {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 160%;
-      color: var(--grayscale-grey-8);
-
-      &:first-child {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      &:nth-child(2) {
-        text-align: right;
-      }
-
-      &:nth-child(3),
-      &:nth-child(4) {
-        color: var(--state-sucess-default);
-        text-align: right;
-      }
-
-      &.minus {
-        color: var(--state-error-default);
       }
     }
   }
