@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import dayjs from "dayjs";
+import Image from "next/image";
 import React from "react";
 
-import { usePriceChangeRatesQuery } from "src/queries";
+import { useCoinLogoMapQuery, usePriceChangeRatesQuery } from "src/queries";
 
 import styles from "./style.module.scss";
 
@@ -16,6 +17,7 @@ const PriceChangeRateTable: React.FC<Props> = ({
   convert = "KRW",
 }) => {
   const { data } = usePriceChangeRatesQuery({ symbols, convert });
+  const { data: logoMap } = useCoinLogoMapQuery();
 
   if (!data) return null;
 
@@ -60,7 +62,15 @@ const PriceChangeRateTable: React.FC<Props> = ({
 
           return (
             <div key={asset.id} className={styles.row}>
-              <span>{asset.symbol}</span>
+              <span>
+                <Image
+                  src={logoMap[asset.symbol]}
+                  width={24}
+                  height={24}
+                  alt="coin logo"
+                />
+                {asset.symbol}
+              </span>
               <span>₩{price}</span>
               <span className={clsx({ [styles.minus]: pc24h < 0 })}>
                 {pc24h.toFixed(2)}%

@@ -5,6 +5,7 @@ import React from "react";
 import { SelectedSymbolState } from "src/hooks";
 import {
   CRYPTO_ASSET_TOTAL_PAGE,
+  useCoinLogoMapQuery,
   useInfiniteCryptoAssetsQuery,
 } from "src/queries";
 
@@ -19,6 +20,7 @@ interface Props {
 const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
   const { data, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteCryptoAssetsQuery();
+  const { data: logoMap } = useCoinLogoMapQuery();
 
   if (!data || hidden) return null;
 
@@ -43,6 +45,12 @@ const CryptoAssetList: React.FC<Props> = ({ selected, toggle, hidden }) => {
                     checked={isSelected}
                     // To silence the onChange missing console error
                     onChange={() => {}}
+                  />
+                  <Image
+                    src={logoMap[asset.symbol]}
+                    width={32}
+                    height={32}
+                    alt="coin logo"
                   />
                   <div className={styles.text}>
                     <span className={styles.name}>{asset.name}</span>
