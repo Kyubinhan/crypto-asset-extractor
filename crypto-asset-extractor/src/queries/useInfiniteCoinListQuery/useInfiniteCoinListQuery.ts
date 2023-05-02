@@ -20,7 +20,7 @@ const fetchPaginatedCoinList = async (pageParam: number, pageSize: number) => {
   }
 
   const start = 1 + pageParam * pageSize;
-  const limit = Math.min(pageSize * (pageParam + 1), TOTAL_NUM_OF_COINS);
+  const limit = Math.min(pageSize, TOTAL_NUM_OF_COINS - start + 1);
 
   const { data } = await axios.get<Response>("/api/cmc", {
     params: {
